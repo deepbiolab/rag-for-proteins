@@ -1,5 +1,7 @@
 # RAG for Proteins
 
+![](./assets/rag.png)
+
 A demonstration of Retrieval-Augmented Generation (RAG) applied to protein analysis, currently focusing on antibody data from SAbDab (Structural Antibody Database).
 
 ## 🌟 Features
