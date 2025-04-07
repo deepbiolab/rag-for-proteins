@@ -77,7 +77,11 @@ class OllamaInterface:
     def generate_response(self, question: str, context: str) -> str:
         """Generate response using the LLM"""
         try:
-            formatted_prompt = f"Question: {question}\n\nContext: {context}"
+            formatted_prompt = (
+                "Instruction: Answer the following question based on the context below. "
+                "if the answer is not contained within the context below, say \"I don't know\". \n\n"
+                f"Question: {question}\n\nContext: {context}\n\nResponse:"
+            )
             response = self.llm.invoke([('human', formatted_prompt)])
             return response.content.strip()
         except Exception as e:
@@ -96,11 +100,13 @@ class RAGPipeline:
         """Process a query through the RAG pipeline"""
         try:
             # Retrieve relevant documents
-            retriever = vectorstore.as_retriever(search_kwargs={"k": 10})
+            retriever = vectorstore.as_retriever(
+                search_kwargs={'k': 15}
+            )
             retrieved_docs = retriever.invoke(question)
             
             # Combine retrieved documents
-            context = "\n\n".join(doc.page_content for doc in retrieved_docs)
+            context = "\n\n".join(doc.page_content fo·r doc in retrieved_docs)
             
             # Generate response
             return self.llm_interface.generate_response(question, context)
