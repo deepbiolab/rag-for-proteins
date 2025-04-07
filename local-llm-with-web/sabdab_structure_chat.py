@@ -106,7 +106,7 @@ class RAGPipeline:
             retrieved_docs = retriever.invoke(question)
             
             # Combine retrieved documents
-            context = "\n\n".join(doc.page_content fo·r doc in retrieved_docs)
+            context = "\n\n".join(doc.page_content for doc in retrieved_docs)
             
             # Generate response
             return self.llm_interface.generate_response(question, context)
